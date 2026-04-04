@@ -1,5 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useSpring,
+  useMotionValue,
+} from "framer-motion";
 
 // =============================================================================
 // COMPONENT: Interactive Background Canvas
@@ -11,7 +18,7 @@ const InteractiveBackground = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     let animationFrameId;
     let particles = [];
 
@@ -68,7 +75,7 @@ const InteractiveBackground = () => {
     };
 
     const animate = () => {
-      ctx.fillStyle = 'rgba(10, 10, 15, 0.1)';
+      ctx.fillStyle = "rgba(10, 10, 15, 0.1)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle, i) => {
@@ -101,12 +108,12 @@ const InteractiveBackground = () => {
     init();
     animate();
 
-    window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -115,7 +122,10 @@ const InteractiveBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ background: 'linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0a1a 100%)' }}
+      style={{
+        background:
+          "linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0a1a 100%)",
+      }}
     />
   );
 };
@@ -130,26 +140,29 @@ const CustomCursor = () => {
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      setPositions(prev => [...prev.slice(-15), { x: e.clientX, y: e.clientY, id: Date.now() }]);
+      setPositions((prev) => [
+        ...prev.slice(-15),
+        { x: e.clientX, y: e.clientY, id: Date.now() },
+      ]);
     };
 
     const handleMouseOver = (e) => {
       const target = e.target;
       setIsHovering(
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON' ||
-        target.closest('a') ||
-        target.closest('button') ||
-        target.closest('[data-hoverable]')
+        target.tagName === "A" ||
+          target.tagName === "BUTTON" ||
+          target.closest("a") ||
+          target.closest("button") ||
+          target.closest("[data-hoverable]"),
       );
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseover", handleMouseOver);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseover", handleMouseOver);
     };
   }, []);
 
@@ -162,7 +175,7 @@ const CustomCursor = () => {
           style={{
             left: pos.x,
             top: pos.y,
-            background: `hsla(${250 + i * 5}, 80%, 60%, ${i / positions.length * 0.5})`
+            background: `hsla(${250 + i * 5}, 80%, 60%, ${(i / positions.length) * 0.5})`,
           }}
           initial={{ scale: 1, opacity: 0.5 }}
           animate={{ scale: 0, opacity: 0 }}
@@ -173,12 +186,12 @@ const CustomCursor = () => {
         className="fixed w-8 h-8 border-2 border-purple-400 rounded-full pointer-events-none z-50 mix-blend-difference"
         animate={{
           scale: isHovering ? 2.5 : 1,
-          rotate: isHovering ? 45 : 0
+          rotate: isHovering ? 45 : 0,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
         style={{
           x: positions[positions.length - 1]?.x - 16 || 0,
-          y: positions[positions.length - 1]?.y - 16 || 0
+          y: positions[positions.length - 1]?.y - 16 || 0,
         }}
       />
     </>
@@ -190,7 +203,7 @@ const CustomCursor = () => {
 // Description: Floating navigation dots on the right side.
 // =============================================================================
 const NavigationOrb = ({ activeSection, setActiveSection }) => {
-  const sections = ['home', 'work', 'about', 'contact'];
+  const sections = ["home", "work", "about", "contact"];
 
   return (
     <motion.div
@@ -206,9 +219,10 @@ const NavigationOrb = ({ activeSection, setActiveSection }) => {
             onClick={() => setActiveSection(section)}
             className="block w-3 h-3 rounded-full mb-4 relative group"
             style={{
-              background: activeSection === section
-                ? 'linear-gradient(135deg, #a855f7, #ec4899)'
-                : 'rgba(255,255,255,0.3)'
+              background:
+                activeSection === section
+                  ? "linear-gradient(135deg, #a855f7, #ec4899)"
+                  : "rgba(255,255,255,0.3)",
             }}
             whileHover={{ scale: 1.5 }}
             whileTap={{ scale: 0.8 }}
@@ -235,18 +249,21 @@ const HeroSection = ({ onNavigate }) => {
   const opacity = useTransform(scrollY, [0, 500], [1, 0]);
   const scale = useTransform(scrollY, [0, 500], [1, 0.8]);
 
-  const words = ['Creator', 'Developer', 'Designer', 'Thinker'];
+  const words = ["Creator", "Developer", "Designer", "Thinker"];
   const [currentWord, setCurrentWord] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentWord(prev => (prev + 1) % words.length);
+      setCurrentWord((prev) => (prev + 1) % words.length);
     }, 2500);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative z-10 overflow-hidden">
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center relative z-10 overflow-hidden"
+    >
       <motion.div
         className="container mx-auto px-6 relative"
         style={{ y, opacity, scale }}
@@ -261,14 +278,15 @@ const HeroSection = ({ onNavigate }) => {
             <motion.div
               className="text-6xl md:text-8xl lg:text-9xl font-black mb-4 tracking-tighter"
               style={{
-                background: 'linear-gradient(135deg, #ffffff 0%, #a855f7 50%, #ec4899 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
+                background:
+                  "linear-gradient(135deg, #ffffff 0%, #a855f7 50%, #ec4899 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
               }}
             >
               HENRY
             </motion.div>
-            
+
             <motion.div
               className="text-3xl md:text-5xl font-light text-gray-400 mb-8 h-16"
               initial={{ opacity: 0 }}
@@ -295,8 +313,9 @@ const HeroSection = ({ onNavigate }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.6 }}
             >
-              Crafting digital experiences at the intersection of art and technology. 
-              Every pixel has purpose. Every interaction tells a story.
+              Crafting digital experiences at the intersection of art and
+              technology. Every pixel has purpose. Every interaction tells a
+              story.
             </motion.p>
 
             <motion.div
@@ -306,16 +325,19 @@ const HeroSection = ({ onNavigate }) => {
               transition={{ delay: 2, type: "spring" }}
             >
               <motion.button
-                onClick={() => onNavigate('work')}
+                onClick={() => onNavigate("work")}
                 className="px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-purple-100 transition-colors"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(168, 85, 247, 0.5)' }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 0 30px rgba(168, 85, 247, 0.5)",
+                }}
                 whileTap={{ scale: 0.95 }}
                 data-hoverable="true"
               >
                 Explore Work
               </motion.button>
               <motion.button
-                onClick={() => onNavigate('contact')}
+                onClick={() => onNavigate("contact")}
                 className="px-8 py-4 border-2 border-white/30 rounded-full font-bold hover:border-white transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -343,10 +365,14 @@ const HeroSection = ({ onNavigate }) => {
                     width: `${100 - i * 15}%`,
                     height: `${100 - i * 15}%`,
                     left: `${i * 7.5}%`,
-                    top: `${i * 7.5}%`
+                    top: `${i * 7.5}%`,
                   }}
                   animate={{ rotate: 360 * (i % 2 === 0 ? 1 : -1) }}
-                  transition={{ duration: 25 + i * 5, repeat: Infinity, ease: "linear" }}
+                  transition={{
+                    duration: 25 + i * 5,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
                 />
               ))}
 
@@ -358,8 +384,12 @@ const HeroSection = ({ onNavigate }) => {
               >
                 <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 p-1">
                   <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center overflow-hidden">
-                    <svg className="w-24 h-24 md:w-32 md:h-32 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    <svg
+                      className="w-24 h-24 md:w-32 md:h-32 text-gray-700"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                     </svg>
                   </div>
                 </div>
@@ -373,18 +403,18 @@ const HeroSection = ({ onNavigate }) => {
                   style={{
                     background: `hsla(${250 + i * 40}, 80%, 60%, 0.8)`,
                     left: `${20 + Math.random() * 60}%`,
-                    top: `${20 + Math.random() * 60}%`
+                    top: `${20 + Math.random() * 60}%`,
                   }}
                   animate={{
                     y: [0, -20, 0],
                     scale: [1, 1.2, 1],
-                    opacity: [0.5, 1, 0.5]
+                    opacity: [0.5, 1, 0.5],
                   }}
                   transition={{
                     duration: 4 + Math.random() * 2,
                     repeat: Infinity,
                     delay: i * 0.3,
-                    ease: "easeInOut"
+                    ease: "easeInOut",
                   }}
                 />
               ))}
@@ -420,37 +450,45 @@ const WorkSection = () => {
 
   const projects = [
     {
-      title: 'Nebula Dashboard',
-      category: 'Web Application',
-      description: 'Real-time analytics platform processing 1M+ events daily with sub-second latency.',
-      tech: ['React', 'TypeScript', 'GraphQL', 'PostgreSQL'],
-      color: 'from-violet-600 to-indigo-600',
-      year: '2024'
+      title: "Tumaini Hospital System",
+      category: "Full Stack Web Application",
+      description:
+        "Hospital management system connecting patients and doctors with appointment scheduling and patient records.",
+      tech: ["React", "Ruby on Rails", "PostgreSQL", "REST API"],
+      color: "from-emerald-600 to-teal-600",
+      year: "2025",
+      link: "#", // add later if deployed
     },
     {
-      title: 'Quantum UI',
-      category: 'Design System',
-      description: 'Component library used by 50+ teams, featuring 100+ accessible components.',
-      tech: ['Vue', 'Storybook', 'Figma', 'A11y'],
-      color: 'from-fuchsia-600 to-pink-600',
-      year: '2024'
+      title: "Charades",
+      category: "Real-time Multiplayer Game",
+      description:
+        "A real-time multiplayer Kenyan-inspired charades game where teams join via a session code and compete to guess words within a time limit across multiple devices.",
+      tech: ["React", "Firebase", "Realtime Database", "Tailwind"],
+      color: "from-indigo-600 to-blue-600",
+      year: "2026",
+      link: "https://cheche-henry.github.io/50-50-game/",
     },
     {
-      title: 'Echo API',
-      category: 'Backend Service',
-      description: 'Distributed microservices architecture handling 10K requests per second.',
-      tech: ['Node.js', 'Redis', 'Kubernetes', 'AWS'],
-      color: 'from-cyan-600 to-blue-600',
-      year: '2023'
+      title: "Thami Water Billing System",
+      category: "Billing & Payment Platform",
+      description:
+        "Water billing and management platform supporting customer accounts, meter tracking, and M-Pesa payment integration.",
+      tech: ["Ruby on Rails", "PostgreSQL", "M-Pesa Daraja API", "JWT"],
+      color: "from-cyan-600 to-sky-600",
+      year: "2025",
+      link: "#",
     },
     {
-      title: 'Prism Mobile',
-      category: 'Mobile App',
-      description: 'Cross-platform app with 100K+ downloads and 4.8 star rating.',
-      tech: ['React Native', 'Firebase', 'Stripe', 'Analytics'],
-      color: 'from-orange-600 to-red-600',
-      year: '2023'
-    }
+      title: "Developer Portfolio",
+      category: "Frontend Application",
+      description:
+        "Interactive portfolio built with React and Tailwind featuring project showcases and responsive design.",
+      tech: ["React", "Vite", "Tailwind CSS"],
+      color: "from-purple-600 to-violet-600",
+      year: "2026",
+      link: "#",
+    },
   ];
 
   return (
@@ -468,9 +506,7 @@ const WorkSection = () => {
               SELECTED
             </span>
           </h2>
-          <h2 className="text-5xl md:text-7xl font-black text-white">
-            WORKS
-          </h2>
+          <h2 className="text-5xl md:text-7xl font-black text-white">WORKS</h2>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8">
@@ -482,8 +518,8 @@ const WorkSection = () => {
                 onClick={() => setActiveCard(i)}
                 className={`p-6 rounded-2xl cursor-pointer transition-all duration-500 ${
                   activeCard === i
-                    ? 'bg-white/10 backdrop-blur-md border border-white/20'
-                    : 'bg-white/5 border border-white/10 hover:bg-white/10'
+                    ? "bg-white/10 backdrop-blur-md border border-white/20"
+                    : "bg-white/5 border border-white/10 hover:bg-white/10"
                 }`}
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -494,16 +530,32 @@ const WorkSection = () => {
               >
                 <div className="flex justify-between items-center">
                   <div>
-                    <span className="text-purple-400 text-sm font-mono">{project.year}</span>
-                    <h3 className="text-2xl font-bold text-white mt-1">{project.title}</h3>
-                    <p className="text-gray-400 text-sm mt-1">{project.category}</p>
+                    <span className="text-purple-400 text-sm font-mono">
+                      {project.year}
+                    </span>
+                    <h3 className="text-2xl font-bold text-white mt-1">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm mt-1">
+                      {project.category}
+                    </p>
                   </div>
                   <motion.div
                     animate={{ rotate: activeCard === i ? 45 : 0 }}
                     transition={{ duration: 0.4, ease: "backOut" }}
                   >
-                    <svg className="w-8 h-8 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    <svg
+                      className="w-8 h-8 text-white/50"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </motion.div>
                 </div>
@@ -519,8 +571,10 @@ const WorkSection = () => {
             transition={{ duration: 0.6, type: "spring" }}
             key={activeCard}
           >
-            <div className={`absolute inset-0 bg-gradient-to-br ${projects[activeCard].color} opacity-80`} />
-            
+            <div
+              className={`absolute inset-0 bg-gradient-to-br ${projects[activeCard].color} opacity-80`}
+            />
+
             <div className="relative h-full p-8 flex flex-col justify-end">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -543,14 +597,17 @@ const WorkSection = () => {
                     </span>
                   ))}
                 </div>
-                <motion.button
-                  className="px-6 py-3 bg-white text-black rounded-full font-bold"
+                <motion.a
+                  href={projects[activeCard].link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-6 py-3 bg-white text-black rounded-full font-bold"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   data-hoverable="true"
                 >
-                  View Case Study
-                </motion.button>
+                  View Live Demo
+                </motion.a>
               </motion.div>
             </div>
 
@@ -561,7 +618,12 @@ const WorkSection = () => {
                   key={i}
                   className="absolute w-full h-full border-2 border-white/20 rounded-full"
                   animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-                  transition={{ duration: 4, repeat: Infinity, delay: i * 0.5, ease: "easeInOut" }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    delay: i * 0.5,
+                    ease: "easeInOut",
+                  }}
                 />
               ))}
             </div>
@@ -579,36 +641,39 @@ const WorkSection = () => {
 const AboutSection = () => {
   const experiences = [
     {
-      year: '2024',
-      title: 'Senior Developer',
-      company: 'Tech Innovators Inc.',
-      description: 'Leading frontend architecture for enterprise applications.'
+      year: "2025",
+      title: "Junior software developer",
+      company: "Kugi Tech.",
+      description: "Had an internship as developer at Kugi Tech",
     },
     {
-      year: '2022',
-      title: 'Full Stack Developer',
-      company: 'Digital Dreams',
-      description: 'Built scalable web applications serving millions of users.'
+      year: "2023",
+      title: "Computer Science",
+      company: "Multimedia University of Kenya",
+      description: "Enrolled for a computer sceince degree",
     },
     {
-      year: '2020',
-      title: 'Frontend Developer',
-      company: 'Creative Studio',
-      description: 'Crafted immersive web experiences for global brands.'
+      year: "2023",
+      title: "Software developer",
+      company: "Moringa School",
+      description: "Got my certification in software Development.",
     },
     {
-      year: '2019',
-      title: 'Started Journey',
-      company: 'Self-Taught',
-      description: 'Began coding journey with curiosity and determination.'
-    }
+      year: "2020",
+      title: "Started Journey",
+      company: "Self-Taught",
+      description: "Began coding journey with curiosity and determination.",
+    },
   ];
 
   const skills = [
-    { name: 'Frontend', items: ['React', 'Vue', 'TypeScript', 'WebGL'] },
-    { name: 'Backend', items: ['Node.js', 'Python', 'Go', 'GraphQL'] },
-    { name: 'Design', items: ['Figma', 'Blender', 'After Effects', 'Principle'] },
-    { name: 'DevOps', items: ['AWS', 'Docker', 'Kubernetes', 'CI/CD'] }
+    { name: "Frontend", items: ["React", "Next", "TypeScript", "Tailwind"] },
+    {
+      name: "Backend",
+      items: ["Node.js", "Python", "Ruby on rails", "GraphQL", "Firebase"],
+    },
+    { name: "Design", items: ["Figma", "Blender", "After Effects"] },
+    { name: "DevOps", items: ["AWS", "CI/CD"] },
   ];
 
   return (
@@ -632,7 +697,7 @@ const AboutSection = () => {
           {/* Timeline */}
           <div className="relative">
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500 via-pink-500 to-orange-500" />
-            
+
             {experiences.map((exp, i) => (
               <motion.div
                 key={exp.year}
@@ -646,7 +711,9 @@ const AboutSection = () => {
                   className="absolute left-6 w-5 h-5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 border-4 border-gray-900"
                   whileHover={{ scale: 1.3 }}
                 />
-                <div className="text-purple-400 font-mono text-sm mb-2">{exp.year}</div>
+                <div className="text-purple-400 font-mono text-sm mb-2">
+                  {exp.year}
+                </div>
                 <h3 className="text-2xl font-bold text-white">{exp.title}</h3>
                 <div className="text-pink-400 mb-2">{exp.company}</div>
                 <p className="text-gray-400">{exp.description}</p>
@@ -664,13 +731,15 @@ const AboutSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.8 }}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
-                  borderColor: 'rgba(168, 85, 247, 0.5)',
-                  boxShadow: '0 0 30px rgba(168, 85, 247, 0.2)'
+                  borderColor: "rgba(168, 85, 247, 0.5)",
+                  boxShadow: "0 0 30px rgba(168, 85, 247, 0.2)",
                 }}
               >
-                <h3 className="text-xl font-bold text-white mb-4">{skill.name}</h3>
+                <h3 className="text-xl font-bold text-white mb-4">
+                  {skill.name}
+                </h3>
                 <div className="space-y-2">
                   {skill.items.map((item) => (
                     <motion.div
@@ -698,10 +767,12 @@ const AboutSection = () => {
           transition={{ duration: 1 }}
         >
           <blockquote className="text-2xl md:text-4xl font-light text-center text-white/90 leading-relaxed">
-            "I believe great software is like great architecture — 
-            it should be beautiful, functional, and stand the test of time."
+            "I believe great software is like great architecture — it should be
+            beautiful, functional, and stand the test of time."
           </blockquote>
-          <div className="text-center mt-6 text-purple-400">— Henry Chochu Gikonyo</div>
+          <div className="text-center mt-6 text-purple-400">
+            — Henry Chochu Gikonyo
+          </div>
         </motion.div>
       </div>
     </section>
@@ -713,8 +784,12 @@ const AboutSection = () => {
 // Description: Interactive form and contact details.
 // =============================================================================
 const ContactSection = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle');
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState("idle");
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -726,11 +801,11 @@ const ContactSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus('submitting');
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setStatus('success');
-    setFormData({ name: '', email: '', message: '' });
-    setTimeout(() => setStatus('idle'), 3000);
+    setStatus("submitting");
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setStatus("success");
+    setFormData({ name: "", email: "", message: "" });
+    setTimeout(() => setStatus("idle"), 3000);
   };
 
   return (
@@ -763,15 +838,28 @@ const ContactSection = () => {
             className="space-y-8"
           >
             <p className="text-xl text-gray-300 leading-relaxed">
-              Have a project in mind? Want to collaborate? Or just want to say hi? 
-              I'm always open to discussing new opportunities and interesting ideas.
+              Have a project in mind? Want to collaborate? Or just want to say
+              hi? I'm always open to discussing new opportunities and
+              interesting ideas.
             </p>
 
             <div className="space-y-6">
               {[
-                { label: 'Email', value: 'gikonyohenrychochu@gmail.com', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
-                { label: 'Location', value: 'Nairobi, Kenya', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z' },
-                { label: 'Phone', value: '+254 754 106 234', icon: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z' }
+                {
+                  label: "Email",
+                  value: "gikonyohenrychochu@gmail.com",
+                  icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+                },
+                {
+                  label: "Location",
+                  value: "Nairobi, Kenya",
+                  icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z",
+                },
+                {
+                  label: "Phone",
+                  value: "+254 754 106 234",
+                  icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z",
+                },
               ].map((item, i) => (
                 <motion.div
                   key={item.label}
@@ -780,11 +868,24 @@ const ContactSection = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.8 }}
-                  whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.1)' }}
+                  whileHover={{
+                    scale: 1.02,
+                    backgroundColor: "rgba(255,255,255,0.1)",
+                  }}
                 >
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
+                    <svg
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d={item.icon}
+                      />
                     </svg>
                   </div>
                   <div>
@@ -797,22 +898,24 @@ const ContactSection = () => {
 
             {/* Social Links */}
             <div className="flex space-x-4 pt-8">
-              {['GitHub', 'LinkedIn', 'Twitter', 'Dribbble'].map((social, i) => (
-                <motion.a
-                  key={social}
-                  href="#"
-                  className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.8 }}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  data-hoverable="true"
-                >
-                  <span className="text-xs font-bold">{social[0]}</span>
-                </motion.a>
-              ))}
+              {["GitHub", "LinkedIn", "Twitter", "Dribbble"].map(
+                (social, i) => (
+                  <motion.a
+                    key={social}
+                    href="#"
+                    className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1, duration: 0.8 }}
+                    whileHover={{ scale: 1.1, y: -5 }}
+                    whileTap={{ scale: 0.95 }}
+                    data-hoverable="true"
+                  >
+                    <span className="text-xs font-bold">{social[0]}</span>
+                  </motion.a>
+                ),
+              )}
             </div>
           </motion.div>
 
@@ -832,8 +935,9 @@ const ContactSection = () => {
               style={{
                 background: useTransform(
                   [mouseX, mouseY],
-                  ([latestX, latestY]) => `radial-gradient(600px circle at ${latestX + 200}px ${latestY + 100}px, rgba(168, 85, 247, 0.4), transparent 40%)`
-                )
+                  ([latestX, latestY]) =>
+                    `radial-gradient(600px circle at ${latestX + 200}px ${latestY + 100}px, rgba(168, 85, 247, 0.4), transparent 40%)`,
+                ),
               }}
             />
 
@@ -843,7 +947,9 @@ const ContactSection = () => {
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   required
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-purple-500 transition-colors"
                   placeholder="Your name"
@@ -851,11 +957,15 @@ const ContactSection = () => {
               </div>
 
               <div>
-                <label className="block text-gray-300 mb-2 text-sm">Email</label>
+                <label className="block text-gray-300 mb-2 text-sm">
+                  Email
+                </label>
                 <input
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   required
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-purple-500 transition-colors"
                   placeholder="your@email.com"
@@ -863,10 +973,14 @@ const ContactSection = () => {
               </div>
 
               <div>
-                <label className="block text-gray-300 mb-2 text-sm">Message</label>
+                <label className="block text-gray-300 mb-2 text-sm">
+                  Message
+                </label>
                 <textarea
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                   required
                   rows={5}
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-purple-500 transition-colors resize-none"
@@ -876,26 +990,51 @@ const ContactSection = () => {
 
               <motion.button
                 type="submit"
-                disabled={status !== 'idle'}
+                disabled={status !== "idle"}
                 className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white font-bold disabled:opacity-50"
-                whileHover={{ scale: status === 'idle' ? 1.02 : 1 }}
-                whileTap={{ scale: status === 'idle' ? 0.98 : 1 }}
+                whileHover={{ scale: status === "idle" ? 1.02 : 1 }}
+                whileTap={{ scale: status === "idle" ? 0.98 : 1 }}
                 data-hoverable="true"
               >
-                {status === 'idle' && 'Send Message'}
-                {status === 'submitting' && (
+                {status === "idle" && "Send Message"}
+                {status === "submitting" && (
                   <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      />
                     </svg>
                     Sending...
                   </span>
                 )}
-                {status === 'success' && (
+                {status === "success" && (
                   <span className="flex items-center justify-center">
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg
+                      className="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                     Message Sent!
                   </span>
@@ -914,19 +1053,22 @@ const ContactSection = () => {
 // Description: Root component assembling all sections.
 // =============================================================================
 export default function App() {
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState("home");
 
   const handleNavigate = (section) => {
     setActiveSection(section);
-    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="bg-gray-900 min-h-screen text-white overflow-x-hidden">
       <InteractiveBackground />
       <CustomCursor />
-      <NavigationOrb activeSection={activeSection} setActiveSection={setActiveSection} />
-      
+      <NavigationOrb
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+      />
+
       <main>
         <HeroSection onNavigate={handleNavigate} />
         <WorkSection />
@@ -939,11 +1081,22 @@ export default function App() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-500 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} Henry Chochu Gikonyo. Crafted with passion.
+              © {new Date().getFullYear()} Henry Chochu Gikonyo. Crafted with
+              passion.
             </div>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-gray-500 hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="text-gray-500 hover:text-white transition-colors">Terms</a>
+              <a
+                href="#"
+                className="text-gray-500 hover:text-white transition-colors"
+              >
+                Privacy
+              </a>
+              <a
+                href="#"
+                className="text-gray-500 hover:text-white transition-colors"
+              >
+                Terms
+              </a>
             </div>
           </div>
         </div>
