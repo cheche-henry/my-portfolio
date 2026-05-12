@@ -1,16 +1,35 @@
-# React + Vite
+# Henry Chochu — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Full-stack developer portfolio built with React 19, Vite, Framer Motion, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** — Latest React with modern patterns
+- **Vite 8** — Fast build tool and dev server
+- **Framer Motion** — Animations and gesture-based interactions
+- **Tailwind CSS 3** — Utility-first styling with custom gold/black theme
+- **Canvas API** — Interactive particle background
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Interactive particle network background
+- Custom cursor with trail effect
+- Responsive design with mobile bottom navigation
+- Parallax scroll effects
+- Animated project showcase with detail panel
+- Contact form with mailto integration
+- Accessibility: reduced-motion support, semantic HTML
 
-## Expanding the ESLint configuration
+## Scripts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run dev      # Start dev server
+npm run build    # Build for production
+npm run lint     # Run ESLint
+npm run preview  # Preview production build
+npm run deploy   # Deploy to GitHub Pages
+```
+
+## Deployment
+
+Deployed via GitHub Pages at `https://cheche-henry.github.io/my-portfolio/`.

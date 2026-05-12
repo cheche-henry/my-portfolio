@@ -5,7 +5,25 @@ export default {
     "./src/**/*.{js,jsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        gold: {
+          50: '#FFF9E6',
+          100: '#FFF0B3',
+          200: '#FFE680',
+          300: '#FFDB4D',
+          400: '#FFD033',
+          500: '#FFD700',
+          600: '#CCA800',
+          700: '#997A00',
+          800: '#665200',
+          900: '#332900',
+        },
+      },
+      fontFamily: {
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+      },
+    },
   },
   plugins: [],
 }
