@@ -98,7 +98,15 @@ const timelineItemVariants = {
 const AboutSection = () => {
   return (
     <section id="about" className="min-h-screen py-20 relative z-10">
-      <div className="container mx-auto px-6">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(rgba(255,215,0,0.02) 1px, transparent 1px)",
+          backgroundSize: "30px 30px",
+        }}
+      />
+
+      <div className="w-full max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -106,7 +114,8 @@ const AboutSection = () => {
           transition={{ duration: 1 }}
           className="mb-16"
         >
-          <h2 className="text-5xl md:text-7xl font-black mb-4">
+          <div className="w-12 h-0.5 bg-gradient-to-r from-gold-500 to-amber-600 mb-6" />
+          <h2 className="text-5xl md:text-7xl font-black mb-4 font-heading">
             <span className="bg-gradient-to-r from-gold-300 via-yellow-500 to-amber-600 bg-clip-text text-transparent">
               THE JOURNEY
             </span>
@@ -136,7 +145,7 @@ const AboutSection = () => {
                   <div className="text-gold-400 font-mono text-sm mb-1">
                     {exp.year}
                   </div>
-                  <h3 className="text-2xl font-bold text-white">
+                  <h3 className="text-2xl font-bold text-white font-heading">
                     {exp.title}
                   </h3>
                   <div className="text-amber-400 mb-1">{exp.company}</div>
@@ -169,7 +178,7 @@ const AboutSection = () => {
                   boxShadow: "0 0 30px rgba(255, 215, 0, 0.15)",
                 }}
               >
-                <h3 className="text-xl font-bold text-white mb-4">
+                <h3 className="text-xl font-bold text-white mb-4 font-heading">
                   {skill.name}
                 </h3>
                 <div className="space-y-3">
@@ -225,7 +234,9 @@ const AboutSection = () => {
             }}
             data-hoverable="true"
           >
-            <div className="text-3xl font-black text-gold-400 mb-1">143+</div>
+            <div className="text-3xl font-black text-gold-400 mb-1 font-heading">
+              143+
+            </div>
             <div className="text-gray-400 text-sm">GitHub Repositories</div>
           </motion.a>
           <motion.a
@@ -243,7 +254,9 @@ const AboutSection = () => {
             }}
             data-hoverable="true"
           >
-            <div className="text-3xl font-black text-gold-400 mb-1">Full-Stack</div>
+            <div className="text-3xl font-black text-gold-400 mb-1 font-heading">
+              Full-Stack
+            </div>
             <div className="text-gray-400 text-sm">React + Rails Developer</div>
           </motion.a>
           <motion.a
@@ -264,24 +277,33 @@ const AboutSection = () => {
                 ?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            <div className="text-3xl font-black text-gold-400 mb-1">Open</div>
+            <div className="text-3xl font-black text-gold-400 mb-1 font-heading">
+              Open
+            </div>
             <div className="text-gray-400 text-sm">Available for Work</div>
           </motion.a>
         </div>
 
         <motion.div
-          className="mt-20 p-8 md:p-12 bg-gradient-to-r from-black/60 to-gold-900/30 rounded-3xl border border-gold-500/20"
+          className="mt-20 p-8 md:p-12 bg-gradient-to-r from-black/60 to-gold-900/30 rounded-3xl border border-gold-500/20 flex flex-col md:flex-row items-center gap-6 text-center md:text-left"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
         >
-          <blockquote className="text-2xl md:text-4xl font-light text-center text-white/90 leading-relaxed">
-            "I believe great software is like great architecture — it should be
-            beautiful, functional, and stand the test of time."
-          </blockquote>
-          <div className="text-center mt-6 text-gold-400">
-            — Henry Chochu Gikonyo
+          <img
+            src="https://avatars.githubusercontent.com/u/126640901?v=4"
+            alt="Henry Chochu Gikonyo"
+            className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-gold-500/30 flex-shrink-0"
+          />
+          <div className="flex-1">
+            <blockquote className="text-xl md:text-3xl font-light text-white/90 leading-relaxed">
+              "I believe great software is like great architecture — it should be
+              beautiful, functional, and stand the test of time."
+            </blockquote>
+            <div className="mt-4 text-gold-400 font-medium">
+              — Henry Chochu Gikonyo
+            </div>
           </div>
         </motion.div>
       </div>
