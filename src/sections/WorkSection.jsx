@@ -41,7 +41,12 @@ const projects = [
     gradient: "from-gold-600 to-amber-700",
     year: "2026",
     link: "https://github.com/cheche-henry/my-portfolio",
-    images: [],
+    liveUrl: "https://henry-chochu-portfolio.vercel.app/",
+    images: [
+      `${base}portfolio-landing.png`,
+      `${base}portfolio-works.png`,
+      `${base}portfolio-experience.png`,
+    ],
   },
   {
     title: "Mobile App",
