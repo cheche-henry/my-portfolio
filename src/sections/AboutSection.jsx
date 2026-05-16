@@ -24,7 +24,7 @@ const experiences = [
   },
   {
     year: "2021",
-    title: "Freelance Web Developer",
+    title: "Freelance Software Developer",
     company: "Self-Employed",
     description:
       "Built websites and web applications for small businesses. Developed foundational skills in HTML, CSS, JavaScript, and responsive design.",
@@ -255,9 +255,9 @@ const AboutSection = () => {
             data-hoverable="true"
           >
             <div className="text-3xl font-black text-gold-400 mb-1 font-heading">
-              Full-Stack
+              Software
             </div>
-            <div className="text-gray-400 text-sm">React + Rails Developer</div>
+            <div className="text-gray-400 text-sm">Engineer</div>
           </motion.a>
           <motion.a
             href="#contact"

@@ -6,7 +6,7 @@ const base = import.meta.env.BASE_URL;
 const projects = [
   {
     title: "Tumaini Hospital System",
-    category: "Full Stack Web Application",
+    category: "Full Stack Application",
     description:
       "Hospital management system connecting patients and doctors with appointment scheduling, patient records, and real-time availability tracking.",
     tech: ["React", "Ruby on Rails", "PostgreSQL", "REST API"],
@@ -34,7 +34,7 @@ const projects = [
   },
   {
     title: "Developer Portfolio",
-    category: "Frontend Application",
+    category: "Frontend Engineering",
     description:
       "Interactive portfolio built with React, Framer Motion, and Tailwind CSS featuring a dynamic particle background, smooth animations, and responsive design.",
     tech: ["React", "Vite", "Framer Motion", "Tailwind CSS"],

@@ -13,7 +13,7 @@ const HeroSection = ({ onNavigate }) => {
   const scale = useTransform(scrollY, [0, 500], [1, 0.85]);
 
   const words = useMemo(
-    () => ["Full-Stack Developer", "UI Engineer", "Problem Solver", "Rails Developer"],
+    () => ["Software Engineer", "Full-Stack Developer", "Problem Solver", "Systems Developer"],
     [],
   );
   const [currentWord, setCurrentWord] = useState(0);
@@ -101,8 +101,8 @@ const HeroSection = ({ onNavigate }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.6 }}
             >
-              I build responsive, human-centered web experiences with React,
-              Ruby on Rails, and modern design tools. Every project is crafted
+              I build robust, human-centered software with React,
+              Ruby on Rails, and modern engineering practices. Every project is crafted
               with purpose.
             </motion.p>
 

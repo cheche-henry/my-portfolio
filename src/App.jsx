@@ -65,7 +65,7 @@ export default function App() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-500 text-sm mb-4 md:mb-0">
               &copy; {new Date().getFullYear()} Henry Chochu Gikonyo. Building
-              the web, one commit at a time.
+              software, one commit at a time.
             </div>
             <div className="flex space-x-6 text-sm">
               <a
