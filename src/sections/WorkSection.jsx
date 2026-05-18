@@ -5,16 +5,20 @@ const base = import.meta.env.BASE_URL;
 
 const projects = [
   {
-    title: "Tumaini Hospital System",
+    title: "E-Commerce Platform",
     category: "Full Stack Application",
     description:
-      "Hospital management system connecting patients and doctors with appointment scheduling, patient records, and real-time availability tracking.",
-    tech: ["React", "Ruby on Rails", "PostgreSQL", "REST API"],
+      "Full-stack e-commerce platform for Kenyan school books and supplies serving CBC and KCSE curriculum needs. Built with React + Vite storefront, Rails API backend, M-Pesa payment integration, and admin dashboard.",
+    tech: ["React", "Ruby on Rails", "PostgreSQL", "M-Pesa Daraja API", "Sidekiq", "Zustand", "Sentry"],
     gradient: "from-gold-800 to-amber-900",
     year: "2025",
-    link: "https://github.com/cheche-henry/tumaini-hospital",
+    link: "https://github.com/cheche-henry",
     isPrivate: true,
-    images: [],
+    images: [
+      `${base}ecommerce-dashboard.png`,
+      `${base}ecommerce-landing.png`,
+      `${base}ecommerce-shop.png`,
+    ],
   },
   {
     title: "On The Clock",
