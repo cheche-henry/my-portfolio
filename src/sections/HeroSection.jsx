@@ -57,12 +57,6 @@ const HeroSection = ({ onNavigate }) => {
             transition={{ duration: 1.2, delay: 0.2, type: "spring" }}
             className="order-2 lg:order-1"
           >
-            <motion.div className="mb-2">
-              <span className="inline-block px-4 py-1.5 bg-gold-500/10 border border-gold-500/20 rounded-full text-gold-400 text-xs font-medium font-mono tracking-wider uppercase">
-                React &bull; Rails &bull; UI/UX
-              </span>
-            </motion.div>
-
             <motion.h1
               className="text-7xl sm:text-8xl md:text-9xl lg:text-[8rem] font-bold mb-4 tracking-tighter leading-none font-heading"
               style={{
