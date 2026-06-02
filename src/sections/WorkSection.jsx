@@ -53,16 +53,15 @@ const projects = [
     ],
   },
   {
-    title: "Mobile App",
-    category: "Mobile Application",
+    title: "ASCII//FORGE",
+    category: "Terminal Media Processing Studio",
     description:
-      "A cross-platform mobile application built with React Native. Details coming soon.",
-    tech: ["React Native", "TypeScript", "Firebase"],
+      "A real-time ASCII art conversion engine and interactive particle system. Transforms images, video, and webcam feeds into animated ASCII art with a cyberpunk terminal aesthetic. Features 13 animation effects, custom physics particle engine, background removal, multi-source export (PNG, JPG, TXT, HTML), and mouse-interactive per-character spring dynamics.",
+    tech: ["React", "Canvas API", "Zustand", "Floyd-Steinberg Dithering", "Sobel Edge Detection"],
     gradient: "from-amber-700 to-gold-800",
     year: "2026",
-    link: "#",
+    link: "https://github.com/cheche-henry",
     images: [],
-    mobileApp: true,
   },
 ];
 
@@ -199,42 +198,20 @@ const WorkSection = () => {
 
             {hasImages && (
               <div className="relative w-full bg-black/40 overflow-hidden">
-                {project.mobileApp ? (
-                  <div className="flex items-center justify-center py-8">
-                    <div className="relative w-[240px] sm:w-[280px] aspect-[9/16]">
-                      <div className="absolute inset-0 rounded-[28px] border-[3px] border-white/15 bg-black shadow-2xl overflow-hidden">
-                        <AnimatePresence mode="wait">
-                          <motion.img
-                            key={activeImage}
-                            src={project.images[activeImage]}
-                            alt={`${project.title} screenshot ${activeImage + 1}`}
-                            initial={{ opacity: 0, scale: 1.05 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.95 }}
-                            transition={{ duration: 0.3 }}
-                            className="w-full h-full object-contain"
-                          />
-                        </AnimatePresence>
-                      </div>
-                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[18px] bg-black rounded-b-xl z-10" />
-                    </div>
-                  </div>
-                ) : (
-                  <div className="w-full h-56 md:h-72 overflow-hidden">
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={activeImage}
-                        src={project.images[activeImage]}
-                        alt={`${project.title} screenshot ${activeImage + 1}`}
-                        initial={{ opacity: 0, scale: 1.05 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.3 }}
-                        className="w-full h-full object-cover object-top"
-                      />
-                    </AnimatePresence>
-                  </div>
-                )}
+                <div className="w-full h-56 md:h-72 overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={activeImage}
+                      src={project.images[activeImage]}
+                      alt={`${project.title} screenshot ${activeImage + 1}`}
+                      initial={{ opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </AnimatePresence>
+                </div>
                 {project.images.length > 1 && (
                   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
                     {project.images.map((img, i) => (
